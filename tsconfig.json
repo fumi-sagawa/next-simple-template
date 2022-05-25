@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true, // restrict index signature
+    "exactOptionalPropertyTypes": true, // restrict optional property
+    "noImplicitReturns": true, // requires a write of all return values in the function
+    "noFallthroughCasesInSwitch": true, // must write 'break' for fallthrough in switch
+    "forceConsistentCasingInFileNames": true, // judge case Upper and Lower
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["./*"],
+    },
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "jest.config.js"],
+  "exclude": ["node_modules"]
+}

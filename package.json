@@ -1,0 +1,58 @@
+{
+  "name": "next-ts-template",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev-ip": "next dev --hostname 0.0.0.0",
+    "path": "pathpida --ignorePath .gitignore --watch",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:eslint": "eslint --cache .",
+    "lint:prettier": "prettier --check .",
+    "test": "jest --watch",
+    "test-cov": "jest --collectCoverage=true --coverageReporters=json-summary",
+    "component": "scaffdog generate component"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120
+  },
+  "dependencies": {
+    "next": "12.1.5",
+    "nprogress": "0.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-error-boundary": "3.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "12.1.5",
+    "@types/node": "16.11.27",
+    "@types/nprogress": "0.2.0",
+    "@types/react": "17.0.44",
+    "@typescript-eslint/eslint-plugin": "5.20.0",
+    "@typescript-eslint/parser": "5.20.0",
+    "eslint": "8.9.0",
+    "eslint-config-next": "12.1.5",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "husky": "7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "12.3.8",
+    "pathpida": "^0.18.1",
+    "prettier": "2.5.1",
+    "scaffdog": "1.1.0",
+    "ts-jest": "27.1.4",
+    "typescript": "4.5.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

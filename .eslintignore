@@ -1,0 +1,7 @@
+**/node_modules/*
+**/out/*
+**/.next/*
+package.json
+renovate.json
+*.config.js
+.eslintrc.js
