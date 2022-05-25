@@ -1,5 +1,5 @@
 ---
-name: "component"
+name: "ui-component"
 root: "src/components"
 output: "**/*"
 ignore: []
@@ -17,36 +17,16 @@ export { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}';
 
 ```typescript
 import styles from './{{ inputs.name | pascal }}.module.scss'
-import {use{{ inputs.name | pascal }}} from "./use{{ inputs.name | pascal }}"
-
-type {{ inputs.name | pascal }}ContainerProps = {
-
-}
-
-export const {{ inputs.name | pascal }}Container = (props: {{ inputs.name | pascal }}ContainerProps) => {
-  const {} = use{{ inputs.name | pascal }}()
-  return <{{ inputs.name | pascal }}/>
-}
 
 type {{ inputs.name | pascal }}Props = {
-  
+
 }
 
 export const {{ inputs.name | pascal }} = (props: {{ inputs.name | pascal }}Props) => {
   return null
 }
-```
-
-
-# `{{ inputs.name | pascal }}/use{{ inputs.name | pascal }}.ts`
-
-```typescript
-export const use{{inputs.name | pascal}} = () => {
-  return null
-}
 
 ```
-
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
 
@@ -66,27 +46,6 @@ export const basic : ComponentStory<typeof  {{ inputs.name | pascal }}> = (args)
 
 ```
 
-# `{{ inputs.name | pascal }}/use{{ inputs.name | pascal }}.test.tsx`
-
-```typescript
-import { cleanup, renderHook } from '@testing-library/react-hooks'
-
-import { use{{ inputs.name | pascal }} } from './use{{ inputs.name | pascal }}'
-
-describe('use{{ inputs.name | pascal }}のテスト', () => {
-  beforeEach(() => {
-    cleanup()
-  })
-
-  it('use{{ inputs.name | pascal }}の機能テスト', () => {
-    const { result } = renderHook(() => {
-      return use{{ inputs.name | pascal }}()
-    })
-    // expect().toBe()
-  })
-})
-
-```
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.module.scss`
 

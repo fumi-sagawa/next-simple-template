@@ -48,12 +48,12 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn', // effectやcallbackのdeps linter
     'import/newline-after-import': 'error',
     'import/no-default-export': 'error',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': 'warn',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    // '@typescript-eslint/explicit-module-boundary-types': 'warn', //型推論が活かせないためoff
     '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports' }],
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }], // 未使用変数はエラー
+    '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }], // 未使用変数
   },
   overrides: [
     // 一部ルールを除外する
