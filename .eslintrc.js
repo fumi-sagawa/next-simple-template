@@ -67,5 +67,12 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
+    {
+      files: ['**/*.stories.tsx'],
+      rules: {
+        'arrow-body-style': 'off',
+        'import/no-default-export': 'off',
+      },
+    },
   ],
 }

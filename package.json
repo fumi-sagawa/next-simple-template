@@ -12,7 +12,9 @@
     "lint:prettier": "prettier --check .",
     "test": "jest --watch",
     "test-cov": "jest --collectCoverage=true --coverageReporters=json-summary",
-    "component": "scaffdog generate component"
+    "component": "scaffdog generate component",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -27,12 +29,17 @@
     "react-error-boundary": "3.1.4"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^6.5.5",
+    "@storybook/builder-webpack5": "^6.5.5",
+    "@storybook/manager-webpack5": "^6.5.5",
+    "@storybook/react": "^6.5.5",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "@types/node": "^17.0.35",
     "@types/react": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
+    "css-loader": "^6.7.1",
     "eslint": "8.9.0",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.3.0",
@@ -41,9 +48,13 @@
     "husky": "7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "12.3.8",
+    "next-router-mock": "^0.6.9",
     "pathpida": "^0.18.1",
     "prettier": "2.5.1",
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0",
     "scaffdog": "1.1.0",
+    "style-loader": "^3.3.1",
     "ts-jest": "27.1.4",
     "typescript": "^4.7.2"
   },
