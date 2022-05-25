@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "next": "12.1.5",
-    "nprogress": "0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-error-boundary": "3.1.4"
@@ -31,7 +30,6 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "@types/node": "16.11.27",
-    "@types/nprogress": "0.2.0",
     "@types/react": "17.0.44",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",

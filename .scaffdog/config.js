@@ -1,3 +1,3 @@
 module.exports = {
-  files: ['./*'],
+  files: ['./*'], // Markdown ファイルの検索パターン
 }

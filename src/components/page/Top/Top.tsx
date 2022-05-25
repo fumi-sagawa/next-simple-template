@@ -14,7 +14,7 @@ export const Top = () => {
       <main>
         <div>
           <h1>
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
+            Welcome to <a href="https://nextjs.org">Next.js!!</a>
           </h1>
           <h1>test text</h1>
 
