@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import { Top } from '@/components/page/Top/Top'
+import { Top } from '@/components/pages/Top/Top'
 
 const TopPage: NextPage = () => {
   return <Top />

@@ -19,11 +19,7 @@ export { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}';
 import styles from './{{ inputs.name | pascal }}.module.scss'
 import {use{{ inputs.name | pascal }}} from "./use{{ inputs.name | pascal }}"
 
-type {{ inputs.name | pascal }}Props = {
-
-}
-
-export const {{ inputs.name | pascal }} = (props: {{ inputs.name | pascal }}Props) => {
+export const {{ inputs.name | pascal }} = () => {
   const {} = use{{ inputs.name | pascal }}()
   return <{{ inputs.name | pascal }}View/>
 }

@@ -1,5 +1,5 @@
 ---
-name: "ui-component"
+name: "parts-component"
 root: "src/components"
 output: "**/*"
 ignore: []
@@ -8,13 +8,11 @@ questions:
 ---
 
 # `{{ inputs.name | pascal }}/index.ts`
-
 ```typescript
 export { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}';
 ```
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
-
 ```typescript
 import styles from './{{ inputs.name | pascal }}.module.scss'
 
@@ -29,7 +27,6 @@ export const {{ inputs.name | pascal }} = (props: {{ inputs.name | pascal }}Prop
 ```
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
-
 ```typescript
 import { action } from '@storybook/addon-actions'
 import type { ComponentMeta, ComponentStory } from '@storybook/react'
@@ -48,6 +45,5 @@ export const basic : ComponentStory<typeof  {{ inputs.name | pascal }}> = (args)
 
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.module.scss`
-
 ```scss
 ```
