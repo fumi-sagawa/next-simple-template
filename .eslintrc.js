@@ -51,7 +51,7 @@ module.exports = {
     'simple-import-sort/imports': 'warn',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    // '@typescript-eslint/explicit-module-boundary-types': 'warn', //型推論が活かせないためoff
+    '@typescript-eslint/explicit-module-boundary-types': 'warn',
     '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports' }],
     '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }], // 未使用変数
   },
@@ -68,7 +68,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.stories.tsx'],
+      files: ['**/*.stories.tsx'], //storybookで不必要なルールをオフ
       rules: {
         'arrow-body-style': 'off',
         'import/no-default-export': 'off',
