@@ -5,7 +5,7 @@ Next.jsのテンプレートリポジトリです。
 ## コンテンツ一覧
 * [🧑‍💻概要](./docs/overview.md)
 * [🧩コンポーネント設計](./docs/component-design.md)
-* [📁ディレクトリ構成(WIP)](./docs/directory-structure.md)
+* [📁ディレクトリ構成](./docs/directory-structure.md)
 * [🗃️状態管理(WIP)](./docs/state-management.md)
 * [🧪テスト(WIP)](./docs/test.md)
 * [🐶ファイル生成(Scaffold)(WIP)](./)
