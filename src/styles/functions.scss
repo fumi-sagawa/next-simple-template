@@ -1,0 +1,7 @@
+@use "./variables.scss" as *;
+
+@mixin mq($size) {
+  @media screen and (min-width: #{map-get($breakpoints, $size)}) {
+    @content;
+  }
+}

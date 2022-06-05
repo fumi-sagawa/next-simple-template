@@ -1,0 +1,7 @@
+.heading{
+  font-size: 20px;
+  font-weight: 600;
+  @include mq(md) {
+    font-size: 30px;
+  }
+}
