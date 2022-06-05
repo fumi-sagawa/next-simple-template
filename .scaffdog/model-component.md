@@ -1,5 +1,5 @@
 ---
-name: "component"
+name: "model-component"
 root: "src/components"
 output: "**/*"
 ignore: []

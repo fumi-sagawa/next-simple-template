@@ -22,7 +22,7 @@ Reactのコンポーネントは見た目、ロジック、状態など様々な
 
 ## view-component
 見た目だけのコンポーネントであり、状態やpropsを持ちません。   
-html,・cssの代わりや、コンポーネントの集約のために利用します。
+html・cssの代わりや、コンポーネントの集約のために利用します。
 ```tsx
 // 例
 export const Component = () => {
@@ -31,7 +31,7 @@ export const Component = () => {
 ```
 
 ## parts-component
-引数によるViewの表示,イベントの発火を担うコンポーネントです。カタログ化されるべきコンポーネントであり、基本的に状態を持たず内部の情報は親から渡されます。
+引数によるViewの表示、イベントの発火を担うコンポーネントです。カタログ化されるべきコンポーネントであり、基本的に状態を持たず内部の情報は親から渡されます。
 ```tsx
 // 例
 type ButtonProps = {
@@ -51,9 +51,9 @@ export const Button = (props: ButtonProps) => {
 
 
 ## model-component
-状態を持つことが目的のコンポーネントです。状態はLocal, Global両方を指し、またmodelであるため外部とのAPI連携が可能です。
+状態を持つことが目的のコンポーネントです。状態はLocal, Global両方を指し、またmodel層であるため外部とのAPI連携が可能です。
 
-コンポーネント内部で状態の呼び出しを行なってしまうと、カタログ化や後々のコンポーネントの切り出しの際に不便です。
+コンポーネント内部で状態を定義すると、カタログ化や後々のコンポーネント切り出しの際に不便です。
 したがって`model-component`では`Container/Presentational pattern`を用いています。
 
 ```tsx
@@ -63,7 +63,13 @@ import { Button } from "@/components/parts/Button"
 //Container
 export const Counter = () => {
   const {count, increment, decrement} = useCounter()
-  return <CounterView {}/>
+  return (
+    <CounterView 
+      title={count}
+      increment={increment}
+      decrement={decrement}
+    />
+  )
 }
 
 //Presentational
@@ -84,16 +90,16 @@ export const CounterView = (props: CounterViewProps) => {
 }
 
 ```
-上記は単純な例ですが、API通信をそのまま表示するとなるとhtmlタグが増えることが予想されます。
+上記は単純な例ですが、API通信からの返却値を表示するとなるとタグの増加が予想されます。
 
-こちらの対処法として、他の場所で利用する可能性がある場合はグローバルな`components/parts`ディレクトリに移動させ、その場所でしか利用しない場合は下階層に`components`ディレクトリを切り、見通しの良さを確保します。
+こちらの対処法として、他の場所で利用する可能性があるコンポーネントを作成する際はグローバルな `components/parts` ディレクトリに移動させます。その場所でしか利用しないコンポーネントが出来上がる際は下階層に `components` ディレクトリを切りましょう。
 
 [>>「📁ディレクトリ構成」参照](./directory-structure.md)
 
 
-## component
+## process-component
 
-model-componentのcontainerにpropsを用意した全ての特徴を持つコンポーネントです。名称がだいぶお粗末な気がするため、各自で変更いただければ幸いです。
+model-componentのcontainerにpropsを用意した全ての特徴を持つコンポーネントです。名称に少し違和感があるため、各自で変更いただければ幸いです。
 
 親から子への純粋なprops受け渡しであれば`parts-component`で事足りますので、こちらに渡るpropsは何らかの処理が施されることとなります。
 
@@ -191,9 +197,9 @@ export const TodoItem = (props: Props) => {
   )
 }
 ```
-とてもスッキリしました。個人的にもこちらが好きです。一方で、コンポーネント内部に関数が定義されているなどロジックがview側に露出している懸念があります。  
+スッキリしました。個人的にもこちらが好きです。一方で、コンポーネント内部に関数が定義されているなどロジックがview側に露出している懸念があります。  
 
-１つ目と2つ目、どちらが適した記法なのでしょうか。
+この１つ目と2つ目、どちらが適した記法なのでしょうか。
 
 おそらく考えるべきは、そもそも何のために`Container/Presentational Pattern`を用いていたかということです。
 
@@ -209,11 +215,13 @@ export const TodoItem = (props: Props) => {
 * ２つ目のコンポーネントでもStorybookへの登録に問題はない
 * 今回のケースでは、テストはHooksではなくコンポーネントに対して行われるべき
 
-ということがわかります。
+ということがわかります。今回の例は `parts-component` の拡張としても捉えられるでしょう。
+<br>
+<br>
 
 これまでたくさん方が考案されてきたように、「これが正解」というコンポーネント設計はおそらくありません。
 
-今回のようなケースのために、「カタログ化/テストが可能であれば関数の定義はOK」などのルールを定めておくと安心して実装できそうです。
+今回のようなケースのために、「カタログ化/テストが可能であれば関数の定義はOK」などのルールを定めておくと安心してプロジェクトが進められそうです。
 
 <br>
 <br>

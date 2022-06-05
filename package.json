@@ -12,10 +12,7 @@
     "lint:prettier": "prettier --check .",
     "test": "jest --watch",
     "test-cov": "jest --collectCoverage=true --coverageReporters=json-summary",
-    "component": "scaffdog generate component",
-    "ui-component": "scaffdog generate ui-component",
-    "view-component": "scaffdog generate view-component",
-    "model-component": "scaffdog generate view-component",
+    "scaffold": "scaffdog generate",
     "hooks": "scaffdog generate hooks",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
