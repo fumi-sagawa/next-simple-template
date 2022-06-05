@@ -22,6 +22,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      //参考文献
+      //https://zenn.dev/link/comments/fa9e502d063102
+      "@styles":["src/styles/"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "jest.config.js"],

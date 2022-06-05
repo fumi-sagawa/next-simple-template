@@ -15,7 +15,19 @@ module.exports = {
             },
           },
         },
-        'sass-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            /*
+            Next.js側でSCSSの読み込みにtsconfig.json, next.config.jsを用いている。
+            しかし、Storybookはそのスコープ外であるためmixinなどの読み込みが行えずエラーとなる。
+            したがってwebpackのsass-loader：additionalDataで全てのscssを前処理し、
+            mixinやvariablesなどの初期読み込みを行う。
+            https://webpack.js.org/loaders/sass-loader/
+            */
+            additionalData: `@use 'src/styles/' as *;`,
+          },
+        },
       ],
     })
     return config
