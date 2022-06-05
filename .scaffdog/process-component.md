@@ -1,5 +1,5 @@
 ---
-name: "component"
+name: "process-component"
 root: "src/components"
 output: "**/*"
 ignore: []
