@@ -17,7 +17,7 @@ Reactのコンポーネントは見た目、ロジック、状態など様々な
 | view-component  | ○         | ×     | ×         | ×    | ×     | 
 | parts-component | ○         | ○     | △         | △    | ×     |
 | model-component | ○         | △     | ○         | ○    | ○     |
-| component       | ○         | ○     | ○         | ○    | ○     |
+| process-component       | ○         | ○     | ○         | ○    | ○     |
 
 
 ## view-component
