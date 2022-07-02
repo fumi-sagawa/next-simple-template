@@ -6,7 +6,7 @@
     "dev-ip": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export", 
+    "export": "next build && next export",
     "lint": "next lint",
     "lint:eslint": "eslint --cache .",
     "lint:prettier": "prettier --check .",
@@ -56,6 +56,7 @@
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",
     "scaffdog": "1.1.0",
+    "storybook-addon-next": "^1.6.7",
     "style-loader": "^3.3.1",
     "ts-jest": "27.1.4",
     "typescript": "^4.7.2"
