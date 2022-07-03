@@ -12,7 +12,7 @@ questions:
 
 ```typescript
 export const use{{inputs.name | pascal}} = () => {
-  return null
+  return {}
 }
 ```
 
@@ -29,11 +29,15 @@ describe('use{{ inputs.name | pascal }}のテスト', () => {
     cleanup()
   })
 
-  it('use{{ inputs.name | pascal }}の機能テスト', () => {
+  it('テストする関数と期待される結果を記述', () => {
     const { result } = renderHook(() => {
       return use{{ inputs.name | pascal }}()
     })
-    // expect().toBe()
+    act(() => {
+      result.current.increment();
+    });
+
+    expect(result.current.count).toBe(1);
   })
 })
 

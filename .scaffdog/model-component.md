@@ -8,28 +8,18 @@ questions:
 ---
 
 # `{{ inputs.name | pascal }}/index.ts`
-
 ```typescript
 export { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}';
 ```
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
-
 ```typescript
 import styles from './{{ inputs.name | pascal }}.module.scss'
 import {use{{ inputs.name | pascal }}} from "./use{{ inputs.name | pascal }}"
 
 export const {{ inputs.name | pascal }} = () => {
   const {} = use{{ inputs.name | pascal }}()
-  return <{{ inputs.name | pascal }}View/>
-}
-
-type {{ inputs.name | pascal }}ViewProps = {
-  
-}
-
-export const {{ inputs.name | pascal }}View = (props: {{ inputs.name | pascal }}ViewProps) => {
-  return null
+  return <></>
 }
 ```
 
@@ -38,7 +28,7 @@ export const {{ inputs.name | pascal }}View = (props: {{ inputs.name | pascal }}
 
 ```typescript
 export const use{{inputs.name | pascal}} = () => {
-  return null
+  return {}
 }
 
 ```
@@ -48,37 +38,60 @@ export const use{{inputs.name | pascal}} = () => {
 
 ```typescript
 import { action } from '@storybook/addon-actions'
-import type { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { ComponentMeta, ComponentStoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
 
-import { {{ inputs.name | pascal }}View } from './{{ inputs.name | pascal }}'
+import { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}'
 
 export default {
-  title: '{{ inputs.name | pascal }}',
-  component: {{ inputs.name | pascal }}View,
-  args: { onClick: action('') },
-} as ComponentMeta<typeof {{ inputs.name | pascal }}View>
+  component: {{ inputs.name | pascal }},
+} as ComponentMeta<typeof {{ inputs.name | pascal }}>
 
-export const basic : ComponentStory<typeof  {{ inputs.name | pascal }}View> = (args) => <{{ inputs.name | pascal }}View {...args}></{{ inputs.name | pascal }}View>
+export const Index: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
+  args: { onClick: action('クリック') },
+  parameters: {
+    docs: {
+      description: {
+        component: `コンポーネントの説明マークダウン。`,
+      },
+    },
+    play: async ({ canvasElement }) => {
+      const canvas = within(canvasElement)
+      //以下にインタラクションを記述
+      // userEvent.click(canvas.getByRole('button'))
+  },
+  },
+}
+export const Variation: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
+  args: { onClick: action('クリック') },
+  parameters: {
+    docs: {
+      description: {
+        story: `Storyの説明マークダウン。`,
+      },
+    },
+  },
+}
+
 
 ```
 
 # `{{ inputs.name | pascal }}/use{{ inputs.name | pascal }}.test.tsx`
 
 ```typescript
-import { cleanup, renderHook } from '@testing-library/react-hooks'
+import { render, screen } from '@testing-library/react'
+import { composeStories } from '@storybook/testing-react'
+import * as stories from './{{ inputs.name | pascal }}.stories'
 
-import { use{{ inputs.name | pascal }} } from './use{{ inputs.name | pascal }}'
+const { Index } = composeStories(stories)
 
-describe('use{{ inputs.name | pascal }}のテスト', () => {
-  beforeEach(() => {
-    cleanup()
-  })
-
-  it('use{{ inputs.name | pascal }}の機能テスト', () => {
-    const { result } = renderHook(() => {
-      return use{{ inputs.name | pascal }}()
-    })
-    // expect().toBe()
+describe('{{ inputs.name | pascal }}', () => {
+  it('期待される結果を記述', async () => {
+    const { container } = render(<Index />)
+    await Index.play({ canvasElement: container })
+    //以下にテストターゲートと期待される結果を記述
+    // const target = screen.getByRole("textbox") as HTMLInputElement;
+    // expect(target.value).toEqual("Hello world!");
   })
 })
 
