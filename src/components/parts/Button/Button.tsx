@@ -1,3 +1,4 @@
+// サンプルコメントアウト
 import styles from './Button.module.scss'
 
 type ButtonProps = {
