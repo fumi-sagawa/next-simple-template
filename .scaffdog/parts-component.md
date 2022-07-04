@@ -9,7 +9,7 @@ questions:
 
 # `{{ inputs.name | pascal }}/index.ts`
 ```typescript
-export { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}';
+export * from './{{ inputs.name | pascal }}';
 ```
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
