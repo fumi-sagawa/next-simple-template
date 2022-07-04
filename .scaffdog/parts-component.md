@@ -30,6 +30,7 @@ export const {{ inputs.name | pascal }} = (props: {{ inputs.name | pascal }}Prop
 ```typescript
 import { action } from '@storybook/addon-actions'
 import type { ComponentMeta, ComponentStoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
 
 import { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}'
 
@@ -44,6 +45,11 @@ export const Index: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
       description: {
         component: `コンポーネントの説明マークダウン。`,
       },
+    },
+    play: async ({ canvasElement }) => {
+      const canvas = within(canvasElement)
+      //以下にインタラクションを記述
+      // userEvent.click(canvas.getByRole('button'))
     },
   },
 }
@@ -61,12 +67,13 @@ export const Variation: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
 
 ```
 
-# `{{ inputs.name | pascal }}/use{{ inputs.name | pascal }}.test.tsx`
+# `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.test.tsx`
 
 ```typescript
-import { render, screen } from '@testing-library/react'
 import { composeStories } from '@storybook/testing-react'
-import * as stories from './{{ inputs.name | pascal }}.stories'
+import { render, screen } from '@testing-library/react'
+
+import * as stories from './SampleFeature.stories'
 
 const { Index } = composeStories(stories)
 

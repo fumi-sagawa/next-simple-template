@@ -1,7 +1,5 @@
 import Head from 'next/head'
 
-import { Container } from '@/components/layouts/Container'
-
 import { Documents } from './components/Documents'
 import { Title } from './components/Title'
 import styles from './Top.module.scss'
@@ -16,12 +14,10 @@ export const Top = () => {
       </Head>
 
       <main>
-        <Container>
-          <div className={styles.inner}>
-            <Title />
-            <Documents />
-          </div>
-        </Container>
+        <div className={styles.container}>
+          <Title />
+          <Documents />
+        </div>
       </main>
     </>
   )

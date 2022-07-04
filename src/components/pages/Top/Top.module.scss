@@ -1,4 +1,7 @@
-.inner{
+.container{
+  height: 100vh;
   display: grid;
   gap: 20px;
+  align-content: center;
+  justify-content: center;
 }

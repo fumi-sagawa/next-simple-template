@@ -1,10 +1,17 @@
-import type { ComponentMeta, Story } from '@storybook/react'
+import type { ComponentMeta, ComponentStoryObj } from '@storybook/react'
 
 import { Title } from './Title'
 
 export default {
-  title: 'Title',
   component: Title,
 } as ComponentMeta<typeof Title>
 
-export const basic: Story = () => <Title></Title>
+export const Index: ComponentStoryObj<typeof Title> = {
+  parameters: {
+    docs: {
+      description: {
+        component: `ページタイトル`,
+      },
+    },
+  },
+}
