@@ -12,4 +12,7 @@ module.exports = {
     prependData: "@use 'src/styles/' as *;",
   },
   swcMinify: true,
+  env: {
+    NEXT_PUBLIC_API_MOCKING: 'enabled',
+  },
 }

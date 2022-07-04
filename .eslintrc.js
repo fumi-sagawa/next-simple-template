@@ -38,7 +38,6 @@ module.exports = {
     'prefer-arrow-callback': 'error', // arrow functionを許可
     'prefer-const': 'error', // const推奨
     'func-style': ['error', 'expression'], // 関数式を使わなければいけない
-    'arrow-body-style': ['error', 'always'], // 関数式の中身は必ず中括弧で囲む
     'no-restricted-imports': ['error', { paths: [{ name: 'react', importNames: ['default'] }] }], // reactの明示的なimportは不要なので禁止
     'react/prop-types': 'off', // ts使うので不要
     'react/react-in-jsx-scope': 'off', // reactはグローバルなので不要

@@ -55,6 +55,8 @@
     "jest": "^27.5.1",
     "jotai": "^1.7.0",
     "lint-staged": "12.3.8",
+    "msw": "^0.42.3",
+    "msw-storybook-addon": "^1.6.3",
     "next-router-mock": "^0.6.9",
     "prettier": "2.5.1",
     "sass": "^1.52.1",
@@ -70,5 +72,8 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
