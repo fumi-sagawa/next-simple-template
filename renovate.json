@@ -1,5 +1,0 @@
-{
-  "extends": ["config:base"],
-  "vulnerabilityAlerts": { "enabled": true },
-  "lockFileMaintenance": { "enabled": true }
-}
