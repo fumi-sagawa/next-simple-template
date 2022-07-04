@@ -82,7 +82,7 @@ export const Variation: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
 import { composeStories } from '@storybook/testing-react'
 import { render, screen } from '@testing-library/react'
 
-import * as stories from './SampleFeature.stories'
+import * as stories from './{{ inputs.name | pascal }}.stories'
 
 const { Index } = composeStories(stories)
 
