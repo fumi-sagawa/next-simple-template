@@ -1,5 +1,5 @@
-import { ListItem } from "./components/ListItem";
-import styles from "./Documents.module.scss";
+import { ListItem } from './components/ListItem'
+import styles from './Documents.module.scss'
 
 export const Documents = () => {
   return (
@@ -20,14 +20,11 @@ export const Documents = () => {
         text="🗃️状態管理"
         link="https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/state-management.md"
       />
-      <ListItem
-        text="🧪テスト"
-        link="https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/test.md"
-      />
+      <ListItem text="🧪テスト" link="https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/test.md" />
       <ListItem
         text="🐶ファイル生成(Scaffold)"
         link="https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/scaffolding.md"
       />
     </ul>
-  );
-};
+  )
+}
