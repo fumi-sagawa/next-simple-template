@@ -2,6 +2,9 @@
 本テンプレートを作成するにあたり特に参考にさせていただいた文献です。  
 この場を借りて心より御礼申し上げます。
 
+- [りあクト！ TypeScriptで始めるつらくないReact開発 第4版【① 言語・環境編】](https://oukayuka.booth.pm/items/2368045)
+- [りあクト！ TypeScriptで始めるつらくないReact開発 第4版【② React基礎編】](https://oukayuka.booth.pm/items/2368019)
+- [りあクト！ TypeScriptで始めるつらくないReact開発 第4版【③ React応用編】](https://oukayuka.booth.pm/items/2367992)
 - [Next.jsのテンプレートリポジトリをつくろう](https://zenn.dev/shin_k_2281/articles/how-to-make-next-template-repository)
 - [bulletproof-react](https://github.com/alan2207/bulletproof-react) 
 - [SPA Componentの推しディレクトリ構成について語る](https://zenn.dev/yoshiko/articles/99f8047555f700)
