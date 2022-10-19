@@ -25,9 +25,8 @@
   },
   "dependencies": {
     "next": "12.1.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-error-boundary": "3.1.4"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^6.5.5",
@@ -41,8 +40,8 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "^8.0.0",
-    "@types/node": "^17.0.35",
-    "@types/react": "^17.0.48",
+    "@types/node": "^18.11.2",
+    "@types/react": "^18.0.21",
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
     "css-loader": "^6.7.1",
@@ -53,19 +52,19 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "husky": "7.0.4",
     "jest": "^27.5.1",
-    "jotai": "^1.7.0",
+    "jotai": "^1.8.6",
     "lint-staged": "12.3.8",
     "msw": "^0.42.3",
     "msw-storybook-addon": "^1.6.3",
     "next-router-mock": "^0.6.9",
     "prettier": "2.5.1",
-    "sass": "^1.52.1",
-    "sass-loader": "^13.0.0",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
     "scaffdog": "^1.5.0",
     "storybook-addon-next": "^1.6.7",
     "style-loader": "^3.3.1",
     "ts-jest": "27.1.4",
-    "typescript": "^4.7.2"
+    "typescript": "^4.8.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
