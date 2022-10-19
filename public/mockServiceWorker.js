@@ -126,7 +126,8 @@ async function handleRequest(event, requestId) {
           ok: clonedResponse.ok,
           status: clonedResponse.status,
           statusText: clonedResponse.statusText,
-          body: clonedResponse.body === null ? null : await clonedResponse.text(),
+          body:
+            clonedResponse.body === null ? null : await clonedResponse.text(),
           headers: serializeHeaders(clonedResponse.headers),
           redirected: clonedResponse.redirected,
         },
@@ -196,7 +197,10 @@ async function getResponse(event, client, requestId) {
 
   switch (clientMessage.type) {
     case 'MOCK_SUCCESS': {
-      return delayPromise(() => respondWithMock(clientMessage), clientMessage.payload.delay)
+      return delayPromise(
+        () => respondWithMock(clientMessage),
+        clientMessage.payload.delay,
+      )
     }
 
     case 'MOCK_NOT_FOUND': {
@@ -224,7 +228,7 @@ ${parsedBody.location}
 This exception has been gracefully handled as a 500 response, however, it's strongly recommended to resolve this error, as it indicates a mistake in your code. If you wish to mock an error response, please see this guide: https://mswjs.io/docs/recipes/mocking-error-responses\
 `,
         request.method,
-        request.url
+        request.url,
       )
 
       return respondWithMock(clientMessage)
@@ -269,7 +273,7 @@ self.addEventListener('fetch', function (event) {
         console.warn(
           '[MSW] Successfully emulated a network error for the "%s %s" request.',
           request.method,
-          request.url
+          request.url,
         )
         return
       }
@@ -280,16 +284,18 @@ self.addEventListener('fetch', function (event) {
 [MSW] Caught an exception from the "%s %s" request (%s). This is probably not a problem with Mock Service Worker. There is likely an additional logging output above.`,
         request.method,
         request.url,
-        `${error.name}: ${error.message}`
+        `${error.name}: ${error.message}`,
       )
-    })
+    }),
   )
 })
 
 function serializeHeaders(headers) {
   const reqHeaders = {}
   headers.forEach((value, name) => {
-    reqHeaders[name] = reqHeaders[name] ? [].concat(reqHeaders[name]).concat(value) : value
+    reqHeaders[name] = reqHeaders[name]
+      ? [].concat(reqHeaders[name]).concat(value)
+      : value
   })
   return reqHeaders
 }
