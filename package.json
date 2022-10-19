@@ -18,12 +18,6 @@
     "build-storybook": "build-storybook",
     "prepare": "npx simple-git-hooks || :"
   },
-  "prettier": {
-    "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 120
-  },
   "dependencies": {
     "next": "12.1.5",
     "react": "^18.2.0",
@@ -46,11 +40,16 @@
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@typescript-eslint/parser": "5.20.0",
     "css-loader": "^6.7.1",
-    "eslint": "8.9.0",
+    "eslint": "^8.22.0",
     "eslint-config-next": "12.1.5",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-simple-import-sort": "7.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^27.5.1",
     "jotai": "^1.8.6",
     "lint-staged": "12.3.8",
