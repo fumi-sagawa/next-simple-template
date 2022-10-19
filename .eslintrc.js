@@ -42,7 +42,7 @@ module.exports = {
     'react/prop-types': 'off', // ts使うので不要
     'react/react-in-jsx-scope': 'off', // reactはグローバルなので不要
     'react/display-name': 'error', // 無名関数を禁止する
-    'react/no-unused-prop-types': 'error', // 未使用propsはエラー
+    'react/no-unused-prop-types': 'warn', // 未使用propsは警告
     'react-hooks/rules-of-hooks': 'error', // hooksの基本的なlinter
     'react-hooks/exhaustive-deps': 'warn', // effectやcallbackのdeps linter
     'import/newline-after-import': 'error',
