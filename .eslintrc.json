@@ -12,6 +12,7 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:storybook/recommended",
     "prettier"
   ],
   "parserOptions": {
@@ -134,9 +135,11 @@
       "files": ["**/*.stories.tsx"], //storybookで不必要なルールを無効化する
       "rules": {
         "arrow-body-style": "off",
-        "import/no-default-export": "off"
+        "import/no-default-export": "off",
+        "@typescript-eslint/consistent-type-assertions": "off"
       }
     }
+
   ],
   "settings": {
     "react": {
