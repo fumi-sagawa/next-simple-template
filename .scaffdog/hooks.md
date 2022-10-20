@@ -1,7 +1,7 @@
 ---
 name: "hooks"
 root: "src/hooks"
-output: "**/*"
+output: "."
 ignore: []
 questions:
   name: "Please enter a hooks name."
@@ -29,7 +29,7 @@ describe('use{{ inputs.name | pascal }}のテスト', () => {
     cleanup()
   })
 
-  it('テストする関数と期待される結果を記述', () => {
+  it('テストケースと期待される結果を記述', () => {
     const { result } = renderHook(() => {
       return use{{ inputs.name | pascal }}()
     })
@@ -40,4 +40,4 @@ describe('use{{ inputs.name | pascal }}のテスト', () => {
     expect(result.current.count).toBe(1);
   })
 })
-
+```
