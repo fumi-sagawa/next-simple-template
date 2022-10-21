@@ -2,7 +2,6 @@
 Next.jsのテンプレートリポジトリです。  
 はじめやすさ・拡張性などを考慮し、必要最低限のライブラリを導入しています。
 
-## 目次
 1. [🧑‍💻概要](./docs/overview.md)
 2. [🧩コンポーネント設計](./docs/component-design.md)
 3. [📁ディレクトリ構成](./docs/directory-structure.md)
