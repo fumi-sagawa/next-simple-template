@@ -35,14 +35,15 @@ const countAtom = atom(0)
 import { useAtom } from 'jotai'
 
 const Counter = () => {
-  const [count, setCount] = useAtom(countAtom);
+   const [count, setCount] = useAtom(countAtom);
   return (
     <div>
       {count} <button onClick={() => setCount((c) => c + 1)}>+1</button>
     </div>
   );
-};
+}
 ```
+
 グローバルStateはよく空間の汚染が懸念されます。
 その際には状態を共有したい一つ上をProviderで囲ってあげましょう。
 ```tsx
@@ -81,13 +82,19 @@ Reactにはサーバー通信をキャッシュするために他にもメジャ
 2. 情報をライブラリ側にとっておく(キャッシュ化する)
 3. 次回フェッチ時にキャッシュから情報を返す(無用なAPI通信を避け高速化を図る)
 
-という役割を持つものとなります。
-
-やってくれることはシンプルですが、私たちとしては状態をsetする手間などが減りますので便利です。一方で、キャッシュを使用することになりますので適切に扱わなければ古い情報が返ってくるなどの問題が生じます。
+という役割を持つものとなり、状態をグローバルstateにsetする手間が減り便利です。  
+一方で、キャッシュを使用することになりますので適切に扱わなければ古い情報が返ってくるなどの問題が生じます。
 
 これらのライブラリの根底には `stale-while-revalidate` という考え方があります。正しく運用するためにも、導入前に一度触れておくと良いでしょう。[参考](https://zenn.dev/uttk/articles/b3bcbedbc1fd00#swr-%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B%EF%BC%9F)
 
-(なお、jotaiにもasyncな情報を保持する方法はありますので、チームで相談の上ライブラリを導入してください)
+上記の中から、本リポジトリでは`swr`を採用しています。Next.jsと同じvercel製であること、APIがシンプルであり容量が小さいことが決め手です。
+
+使用方法は[公式ドキュメント](https://swr.vercel.app/ja/docs/getting-started)や以下が参考になります。
+- [SWRで快適！ Reactでのデータ取得](https://www.codegrid.net/series/2021-swr) _有料_
+- [next-realworld-example-app](https://github.com/reck1ess/next-realworld-example-app)
+- [swr/examples](https://github.com/vercel/swr/tree/main/examples)
+- [Riakuto-StartingReact-ja4.0/15-concurrent/04-app/suspense](https://github.com/klemiwary/Riakuto-StartingReact-ja4.0/tree/main/15-concurrent/04-app/suspense)
+
 
 ## コンポーネントの出し分けとSuspense
 上記のライブラリはリクエストを飛ばす際に
@@ -95,7 +102,7 @@ Reactにはサーバー通信をキャッシュするために他にもメジャ
 * fetching(isLoading)
 * error
 
-などの状態を返却してくれます。  また、Reactはあくまで関数ベースです。
+などの状態を返却してくれます。また、Reactはあくまで関数ベースです。
 
 したがってコンポーネントの出しわけ、返却値を分岐させるには以下のようなパターンが使えます。
 ```jsx
