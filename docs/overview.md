@@ -7,10 +7,12 @@
 * prettier
 * Next.js
 * jotai
+* axios
+* swr
 * jest
 * react-testing-library
-* storybook
 * msw
+* storybook
 * scaffdog
 
 なお、linterの設定は「[りあクト！第４版](https://oukayuka.booth.pm/items/2368045)」を参考にしています。
