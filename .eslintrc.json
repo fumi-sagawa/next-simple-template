@@ -12,6 +12,8 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:@next/next/recommended",
+    "plugin:@next/next/core-web-vitals",
     "plugin:storybook/recommended",
     "prettier"
   ],
@@ -112,7 +114,15 @@
         }
       }
     ],
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "jsx-a11y/alt-text": [
+      "warn",
+      {
+        "elements": ["img"],
+        "img": ["Image"]
+      }
+    ],
+    "@next/next/no-img-element": "off"
   },
   "overrides": [
     {
@@ -121,6 +131,7 @@
         "react/prop-types": "off"
       }
     },
+    
     {
       "files": ["src/pages/**/*.tsx"], // pagesのdefault exportは変更不可能であるため許容する
       "rules": { "import/no-default-export": "off" }
