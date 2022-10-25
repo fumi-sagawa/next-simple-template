@@ -14,6 +14,7 @@ const customJestConfig = {
   },
   testEnvironment: 'jest-environment-jsdom',
   testPathIgnorePatterns: ['<rootDir>/e2e/'],
+  coverageDirectory:'__report__/jest-coverage',
   reporters: [
     "default",
     [
