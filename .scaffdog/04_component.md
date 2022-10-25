@@ -1,9 +1,8 @@
 ---
 name: "component"
 root: "src/components"
-# output: "**/*"
-output: "*"
-ignore: []
+output: "**/*"
+ignore: ["src/components","src/components/parts"]
 questions:
   name: "Please enter a component name."
   hasProps:

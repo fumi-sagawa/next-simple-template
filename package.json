@@ -13,11 +13,7 @@
     "test": "jest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:codegen": "npx playwright codegen",
-    "component": "scaffdog generate component",
-    "parts": "scaffdog generate parts",
-    "features": "scaffdog generate features",
-    "pages": "scaffdog generate pages",
-    "hooks": "scaffdog generate hooks",
+    "generate": "scaffdog generate",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "npx simple-git-hooks || :"
