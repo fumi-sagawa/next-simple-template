@@ -1,4 +1,24 @@
 # 🧪テスト
+
+
+- 初めに
+  - テスト概要
+  - 費用対効果
+- 方針
+  - グローバルなhooksに単体テストを書く 
+  - featuresコンポーネントの結合テストを行う
+  - 具体的に
+    - 単体テスト→Jest,testing-library
+    - 結合テスト→Jest,testing-library
+    - E2Eテスト→Playwright
+- 導入ツール
+  - storybook
+  - msw 
+  - jest
+  - testing-library
+  - playwright
+
+
 フロントエンド開発においても、テスト自動化はメジャーなものとなってきました。テストの必要性や方法論は以下の文献がわかりやすいです🦁
 * [質とスピード（2022春版、質疑応答用資料付き）](https://speakerdeck.com/twada/quality-and-speed-2022-spring-edition)
 * [フロントエンド（React Testing Library）で TDD（テスト駆動開発）をする](https://zenn.dev/higa/articles/34439dc279c55dd2ab95)

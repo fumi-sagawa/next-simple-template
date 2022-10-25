@@ -13,6 +13,17 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
+  testPathIgnorePatterns: ['<rootDir>/e2e/'],
+  reporters: [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "__report__",
+        filename: "jest.html",
+      },
+    ],
+  ],
 }
 
 module.exports = createJestConfig(customJestConfig)
