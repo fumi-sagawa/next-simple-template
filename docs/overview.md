@@ -18,7 +18,10 @@
 なお、linterの設定は「[りあクト！第４版](https://oukayuka.booth.pm/items/2368045)」を参考にしています。
 詳細は同書籍「第 7 章 リンターとフォーマッタでコード美人に」をご覧ください。
 
-## はじめ方
+## セットアップ
+nodeのバージョンは`16.18.0`、バージョン管理ツールにはVoltaを推奨します。
+[参考1](https://zenn.dev/taichifukumoto/articles/how-to-use-volta)
+ [参考2](https://dev.classmethod.jp/articles/node-version-volta/)
 
 ```
 # インストール
