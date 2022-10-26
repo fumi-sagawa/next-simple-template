@@ -1,63 +1,12 @@
 # 🧪テスト
 
 
-- 初めに
-  - テスト概要
-  - 費用対効果
-- 方針
-  - グローバルなhooksに単体テストを書く 
-  - featuresコンポーネントの結合テストを行う
-  - 具体的に
-    - 単体テスト→Jest,testing-library
-    - 結合テスト→Jest,testing-library
-    - E2Eテスト→Playwright
-- 導入ツール
-  - storybook
-  - msw 
-  - jest
-  - testing-library
-  - playwright
 
-
-フロントエンド開発においても、テスト自動化はメジャーなものとなってきました。テストの必要性や方法論は以下の文献がわかりやすいです🦁
+フロントエンド開発においてもテスト自動化はメジャーなものとなってきました。テストの必要性や方法論を掴むため、まずは以下の文献がおすすめです🦁
 * [質とスピード（2022春版、質疑応答用資料付き）](https://speakerdeck.com/twada/quality-and-speed-2022-spring-edition)
 * [フロントエンド（React Testing Library）で TDD（テスト駆動開発）をする](https://zenn.dev/higa/articles/34439dc279c55dd2ab95)
 
 
-一方で、テスト自動化の導入はコストが高くメンテナンスの問題も発生します。
-
-以上から本リポジトリでは
-
-* Storybook
-* jest(React Testing Library)
-
-の二つに絞り導入しています。
-
-## Storybook
-コンポーネントをStorybookに集約することによりコンポーネント単体での開発を可能にし、コミュニケーションコストの削減を狙います。
-
-**Storybookの対象は主にpartsディレクトリ** です。カタログ登録の費用対効果から定めました。
-
-記法は[Component Story Format 3.0(CSF3.0)](https://storybook.js.org/blog/component-story-format-3-0/)に統一します。
-```jsx
-import { MyComponent } from './MyComponent';
-
-export default {
-  component: MyComponent,
-};
-
-export const Index = {};
-```
-
-## jest (React Testing Library)
-**プロジェクトルートのHooksに対する単体テストとして利用**します。
-再利用するロジックに不具合があってはいけませんのでクオリティを担保しましょう。
-
-<br>
-
----
-
-## 追加のテスト戦略
 テストは大きく分類すると
 
 * 静的(Static)テスト
@@ -66,90 +15,185 @@ export const Index = {};
 * E2E(end to end)テスト
 
 にわけられ、名称や範囲の違いからシナリオテストやビジュアルリグレッションテストなどが存在します。
+詳細は[こちら](https://zenn.dev/koki_tech/articles/a96e58695540a7#%F0%9F%91%BD-%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E)をご覧ください。
 
-正直奥が深く筆者はまだまだ全体像を掴みきれていません。~~そもそもテスト碌に書けていません。~~
+一方で、テスト自動化の導入はコストは決して低くなくメンテナンスの問題が否めません。  
+メジャーになってきた傾向のあるフロントエンドのテストですが、テストに慣れていないメンバーが多い場合記述コストが高くつき過ぎてしまうケースも否めません。
 
-たしかなことは**費用対効果が高ければ導入すべき**ということです。  
-しかし費用にも
+たしかなことは**費用対効果が高ければ導入すべき**ということです。([資料](https://speakerdeck.com/twada/quality-and-speed-2022-spring-edition)🦁)
 
-* 導入コスト
-* 記述コスト
-* メンテナンスコスト
+上記を全体的に鑑み、本リポジトリでは**記述コストとメンテナンスコストをできるだけ低く**漸進的なテストの導入を目指します。
 
-など多様に存在します。  
+## 方針
+基本的に[先ほどの資料](https://zenn.dev/koki_tech/articles/a96e58695540a7)を踏襲します。
+> 1. トレードオフの観点でバランスのよい結合テストを厚めに書く
+> 2. E2E テストは、課金導線やタイムラインなどの、不具合が発生するとビジネス上のネガティブインパクトの大きい箇所だけ書く
+> 3. 単体テストは、明らかにテストしなくても自明なロジックに対しては書かない。複雑性が高いビジネスロジックの関数に関しては書く
+> 4. 静的テストはベースラインとして必ず引く。導入が後回しになればなるほど導入コストが跳ね上がるので、プロジェクトの最初に必ず入れる
 
-ネットを見るとメジャーになってきた傾向のあるフロントエンドのテストですが、テストに慣れていないメンバーが多い場合導入コストが高くつき過ぎてしまうでしょう。
+これをベースに本リポジトリに落とし込んでいきましょう。
 
-ですので、追加のテスト戦略は納期やメンバーのテスト慣れと相談しつつ導入していくのが良いです。
+### 結合テスト
+`model-component`に対して実行します。したがって対象は以下です。
+- `src/components/features`
+- `src/component/pages/Component`
+- `src/component/pages/Component/components/Component`
 
-追加導入するとして、妥当な選択肢は次の３つでしょう。
+`features`には再利用可能な`model-component`が格納されているため基本的に記述します。  
+結合テストの区分は曖昧であるため`pages`のテスト戦略は場合によって異なります。API通信やビジネスロジックがトップの`pages/Component`に集中しているのであればこちらに記述すると良いでしょう。  
+一方で、pagesは`view-component`のようにレイアウト的な役割が主なこともあるはずです。そのような切り分けの場合は子ディレクトリにmodel-componentが集中するはずですのでそちらにテストを書いていきましょう。
 
-* jest(React Testing Library), Storybook Play function を用いたpartsに対する**単体テスト**
-* jest(React Testing Library), Storybook Play function を用いたfeaturesに対する**結合テスト**
-* cypress または playwright を用いた**E2Eテスト**
+ツールは`Jest`と`testing-library`を用います。  
 
-インターネット上に知見が多いのは前者の jest と cypress 。  
-今後の効率化を見据えて投資するのであれば Storybook Play functions(with Jest) と playwright が良さそうです。
+### E2Eテスト
+基本的に必須ではありません。記述する場合は「不具合が発生するとビジネス上のネガティブインパクトの大きい箇所」に追加します。
 
-なお、本リポジトリにはおそらくデファクトになるであろうStorybook Play functionsとJestでのコンポーネントテストがあらかじめ組み込まれています。  
+ツールには`Playwright`を用います。
 
-したがって本リポジトリの機能をフル活用すると
-- Typescriptによる静的テスト
-- JestによるHooksへの単体テスト
-- Play functionsによるpartsコンポーネントへの単体テスト(任意)
-- Play functionsによるfeatuersコンポーネントへの結合テスト
+### 単体テスト
+グローバルな`hooks`に対して記述します。各コンポーネントのロジックは結合テストでカバーされているため書かない想定です。
+例外として、ロジックのあるような`parts`には記述した方が良いかもしれません。例を挙げるとスナックバーやモーダルなどになります。
 
-のテストが可能です。
+ツールには`Jest`と`testing-library`を用います。
 
-<br>
+## 導入ツール
+本プロジェクトには以下のツールを導入しています。
+- [Storybook](https://storybook.js.org/)
+- [Mock Service Worker](https://mswjs.io/)
+- [Jest](https://jestjs.io/)
+- [testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Playwright](https://playwright.dev/)
 
----
-本リポジトリのテスト戦略は以下の文献がベースです。
+それぞれの使い方と参考文献を以下に記載します。
 
-- [私の推しフロントエンドディレクトリ構成と気をつけたいポイント](https://zenn.dev/sakito/articles/af87061a5016e6)
-- [Reactアプリケーションのテスト戦略](https://speakerdeck.com/0906koki/reactapurikesiyonfalsetesutozhan-lue)
-- [Storybook 駆動開発 @ CSF3.0](https://zenn.dev/takepepe/articles/storybook-driven-development)
+### Storybook
+カタログツールです。`src/parts`配下のコンポーネントを管理し再利用性を高めます。  
+最近ですと`Storybook Playfunction`という機能が追加されテストの実行や可視化ができるようになりました。
+大変便利な機能ではあるのですが、Storybookは破壊的な変更が多くまたストーリーの管理にもコストがかかります。
+費用対効果を考えた際に重要なことは「コンポーネントの管理と再利用性の向上」であると考え、本リポジトリではカタログとテストは分離しコンポーネントの管理に専念してもらうこととしました。
 
-またそれぞれの文献から重要な考え方を抜粋しますので、こちらを押さえておくと勘所が掴みやすくなると思います。
+[後述](./scaffolding.md)する`yarn parts`コマンドを実行すると`.story`ファイルが自動生成されます。
 
-> Testing TrophyではIntegration Test層のテストが一番多くなります。このIntegration Testの中で先程述べたcomponentsやfunctionsがテストされているイメージです。各部分にテストを書いてないと不安になるのも分かりますが、元々Testing Trophyはカバレッジを100%にするのが目的ではありません。ユーザーから見た機能がカバーされていることを大事にしています。なのでユーザーにとって見る面であるルートのindex.tsxにIntegration Testを書くことを意識します。  
-> 
-> storiesでは、Interaction Testを1つ書くことをオススメします。Interaction Testを書くことで機能単位でE2Eテスト(統合テスト)を書くことができます。  
-> 
-> 
-> 「私の推しフロントエンドディレクトリ構成と気をつけたいポイント」より
+```tsx
+import { action } from '@storybook/addon-actions'
+import type { ComponentMeta, ComponentStoryObj } from '@storybook/react'
 
+import { ComponentName } from './ComponentName'
 
-> 結合テストを中心に書く
->
-> 結合テストは、実装速度、実行時間、カバーする範囲でバランスが良い
->  
-> エコシステムが充実してきている  
-> ・APIモックとしてMSW  
-> ・React Testing Library  
-> ・Storybook play functions
-> 
-> 書く対象は、Container Component
-> 
-> Container Copmonentに対して結合テストを書くことで、ユーザシナリオベースでテスト書きやすく、テストカバー範囲も大きい
-> 
->「Reactアプリケーションのテスト戦略」より
+export default {
+  component: ComponentName,
+} as ComponentMeta<typeof ComponentName>
 
-「結合テストのコストパフォーマンスが良く、Storybook Play functionsの登場により目視でテストが描きやすく、再利用可能になった(さらにコストが低下した)」と要約できるかもしれません。
+export const Default: ComponentStoryObj<typeof ComponentName> = {
+  args: { text: 'サンプルボタン', handleClick: action('ボタン押下') },
+  parameters: {
+    docs: {
+      description: {
+        component: 'Some component _markdown_',
+      },
+    },
+  },
+}
+export const Story: ComponentStoryObj<typeof ComponentName> = {
+  args: { text: 'サンプルボタン', handleClick: action('ボタン押下') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Some story **markdown**',
+      },
+    },
+  },
+}
 
-Storybookのカタログ化を積極的に行う。  
-Play functionsでインタラクションも書いてみる。  
-余裕があれば一括でチェックできるようJestに持っていく。  
+```
+`yarn parts`時にコンポーネント名の入力が求められ、そちらの内容が`ComponentName`として扱われ雛形が出力されます。  
+したがって私たちが主に追記するのは`args`部です。サンプルコードの`text`や`handleClick`がコンポーネントの`props`に対応していますので、作成したコンポーネントに合わせて修正してください。
+`parameters.docs.description`はStorybookのドキュメントに表示される説明文です。`component`はコンポーネントの、`story`はストーリーの説明文になります。
 
-というように漸進的に取り入れられれば、それぞれのチームにおける最高効率を負担なく達成できるでしょう。
+場合に応じて`Story`を増やし、バリエーションを増やすことが可能です。
 
-<br>
-
-## その他参考文献
-- [StorybookでMock Service Worker (MSW) を使えるようにする。](https://zenn.dev/rabbit/articles/dd9b04940b93fe)
+**参考文献**
+- [Component Story Format 3.0](https://storybook.js.org/blog/component-story-format-3-0/)
 - [TypeScript + Storybook CSF3.0の書き方とユニットテストへの応用](https://zenn.dev/yukishinonome/articles/6bc6e33d579276)
+- [TypeScript x React x Storybook のプロジェクトを CSF3.0 対応させようとして型問題でテンパったら読む記事](https://qiita.com/p_irisawa/items/3fab9b6a961503b4793b)
+
+### Mock Service Worker
+API通信をモック化するツールです。開発時やテストの際に仮のAPIサーバーとして用います。そもそもなぜこちらのツールを使うのか。という点についてはこちらをご覧ください。[なぜMock Service Workerなのか。入門編](https://zenn.dev/yoshii0110/articles/fb5261b3ff6c6c)
 
 
+`.mocks`フォルダに必要なファイルが格納されており、主に`handler.ts`を編集しモックしたいエンドポイントとレスポンスを追加します。`.mocks/index.ts`をからエクスポートされている`server`もしくは`worker`が実行されることによりモッキングが開始します。  
+
+本リポジトリではあらかじめ`_app.tsx`にて`worker.start()`が動くよう設定されていますので、開発時は`hander.ts`に記述を追加していくだけでモックAPIが追加可能です。
+テスト時はコンポーネント単位、またnode環境で実行されるため別途mswを起動する必要があります。  
+[こちら](https://mswjs.io/docs/getting-started/integrate/node#using-create-react-app)を参考に以下のようなコードを追加しましょう。
+```ts
+describe("コンポーネントのテスト", () => {
+    // Establish API mocking before all tests.
+    beforeAll(() => server.listen());
+    // Reset any request handlers that we may add during the tests,
+    // so they don't affect other tests.
+    afterEach(() => server.resetHandlers());
+    // Clean up after the tests are finished.
+    afterAll(() => server.close());
+
+    //以下にテストケースを記述
+});
+```
+
+
+英語になってしまいますが、詳しい使い方は[公式ドキュメント](https://mswjs.io/)のDocsやExampleがよくまとまっています。
+
+**参考文献**
+- [フロントエンドのテストのモックには msw を使うのが最近の流行りらしい](https://zenn.dev/azukiazusa/articles/using-msw-to-mock-frontend-tests)
+- [私のフロントエンドディレクトリ構成・テスト観点 2022](https://zenn.dev/takepepe/articles/nextjs-testing-strategy-2022)
+
+
+### Jest/testing-library
+単体、結合テスト用のライブラリです。本リポジトリでは主に`src/components/features`に対する結合テスト、`src/hooks`への単体テストに用います。
+
+はじめに`Jest`と`testing-library`別のライブラリだということを抑えてください。  
+まず、`Jest`はJavascript用のテストランナーであり以下のような関数のテストができます。
+```js
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+```
+Nodeサーバーならこれで十分かもしれませんが、私たちの目指すゴールはReactのコンポーネントをテストすることです。したがって、`testing-library`を導入することによりJSXのレンダリングやHooksが動く環境を作りコンポーネントの要素取得やインタラクティブなテストを実現します。
+
+```tsx
+import { Sample } from "@/components/Sample";
+import { render } from "@testing-library/react";
+
+describe("Sampleコンポーネント", () => {
+  test("should first", () => {
+    const { getByText } = render(<Sample />);
+    expect(getByText("Nextjs+Jestのサンプルサプリ")).toBeTruthy();
+    expect(getByText("設定がすごく楽になりました。")).toBeTruthy();
+  });
+});
+```
+https://zenn.dev/miruoon_892/articles/e42e64fbb55137 より引用
+
+より詳細を掴むには[ReactでTesting Library/Jestを使ってテストを学ぼう](https://reffect.co.jp/react/react-test#Testing_LibraryJest)や[Jest](https://jestjs.io/ja/docs/getting-started), [testing-library](https://testing-library.com/docs/react-testing-library/intro/)の公式ドキュメントがおすすめです。
+
+**参考文献**
+- [React Testing Libraryの使い方](https://qiita.com/ossan-engineer/items/4757d7457fafd44d2d2f)
+- [フロントエンド（React Testing Library）で TDD（テスト駆動開発）をする](https://zenn.dev/higa/articles/34439dc279c55dd2ab95)
+- [Next.js 12でJestの設定がかなり楽になった](https://zenn.dev/miruoon_892/articles/e42e64fbb55137)
+- [私のフロントエンドディレクトリ構成・テスト観点 2022](https://zenn.dev/takepepe/articles/nextjs-testing-strategy-2022)
+
+### Playwright
+E2Eテスト用のライブラリです。`/e2e`に記述します。使い方は[公式ドキュメント](https://playwright.dev/docs/intro)を参考にしてください。
+playwrightには[ユーザー操作によるテストコード自動生成機能](https://github.com/microsoft/playwright/blob/main/docs/src/codegen.md)があります。
+本リポジトリでは以下のコマンドで実行可能です。
+```bash
+yarn test:e2e:codegen
+```
+
+**参考文献**
+- [PlayWrightを用いたテスト自動化](https://www.cresco.co.jp/blog/entry/20355/)
+- [Next.jsにPlaywright導入とnext-i18nextで多言語化](https://blog.photosynthesic.jp/2022/04/nextjs-playwright-next-i18next/)
+- [PlaywrightでフロントエンドのE2Eテストを自動化してみた話](https://zenn.dev/mikana0918/articles/b6eb66377fb25a)
 
 <br>
 <br>
