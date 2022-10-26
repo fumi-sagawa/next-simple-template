@@ -183,8 +183,8 @@ https://zenn.dev/miruoon_892/articles/e42e64fbb55137 より引用
 - [私のフロントエンドディレクトリ構成・テスト観点 2022](https://zenn.dev/takepepe/articles/nextjs-testing-strategy-2022)
 
 ### Playwright
-E2Eテスト用のライブラリです。`/e2e`に記述します。使い方は[公式ドキュメント](https://playwright.dev/docs/intro)を参考にしてください。
-playwrightには[ユーザー操作によるテストコード自動生成機能](https://github.com/microsoft/playwright/blob/main/docs/src/codegen.md)があります。
+E2Eテスト用のライブラリです。`/e2e`に記述します。使い方は[公式ドキュメント](https://playwright.dev/docs/intro)を参考にしてください。  
+また、playwrightには[ユーザー操作によるテストコード自動生成機能](https://github.com/microsoft/playwright/blob/main/docs/src/codegen.md)があります。  
 本リポジトリでは以下のコマンドで実行可能です。
 ```bash
 yarn test:e2e:codegen
