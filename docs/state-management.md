@@ -87,37 +87,48 @@ Reactにはサーバー通信をキャッシュするために他にもメジャ
 
 これらのライブラリの根底には `stale-while-revalidate` という考え方があります。正しく運用するためにも、導入前に一度触れておくと良いでしょう。[参考](https://zenn.dev/uttk/articles/b3bcbedbc1fd00#swr-%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B%EF%BC%9F)
 
-上記の中から、本リポジトリでは`swr`を採用しています。Next.jsと同じvercel製であること、APIがシンプルであり容量が小さいことが決め手です。
+上記の中から、本リポジトリでは`Tanstack Query(React Query)`を採用しています。 
+最も使われているデータフェッチングライブラリであることや、キャッシュのkeyとフェッチングの関数が独立しており細かい調整がしやすいことから選定しました。
 
 使用方法は[公式ドキュメント](https://swr.vercel.app/ja/docs/getting-started)や以下が参考になります。
-- [SWRで快適！ Reactでのデータ取得](https://www.codegrid.net/series/2021-swr) _有料_
-- [next-realworld-example-app](https://github.com/reck1ess/next-realworld-example-app)
-- [swr/examples](https://github.com/vercel/swr/tree/main/examples)
-- [Riakuto-StartingReact-ja4.0/15-concurrent/04-app/suspense](https://github.com/klemiwary/Riakuto-StartingReact-ja4.0/tree/main/15-concurrent/04-app/suspense)
+- [非同期処理に疲れた方に、ReactQueryの処方箋](https://zenn.dev/t_keshi/articles/react-query-prescription)
+- [React Queryを使いこなすために試したこと](https://zenn.dev/himorishige/articles/76e903bc5a1aa2)
+- [Filtering a fetched list from an API using React Query](https://stackoverflow.com/questions/66797655/filtering-a-fetched-list-from-an-api-using-react-query)
 
 
 ## コンポーネントの出し分けとSuspense
 上記のライブラリはリクエストを飛ばす際に
 * data
-* fetching(isLoading)
 * error
+* isLoading(fetching)
 
 などの状態を返却してくれます。また、Reactはあくまで関数ベースです。
 
 したがってコンポーネントの出しわけ、返却値を分岐させるには以下のようなパターンが使えます。
 ```jsx
+function Example() {
+  const { isLoading, error, data } = useQuery(['repoData'], () =>
+    fetch('https://api.github.com/repos/tannerlinsley/react-query').then(res =>
+      res.json()
+    )
+  )
 
-import useSWR from 'swr'
+  if (isLoading) return 'Loading...'
 
-function Profile() {
-  const { data, error } = useSWR('/api/user', fetcher)
+  if (error) return 'An error has occurred: ' + error.message
 
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-  return <div>hello {data.name}!</div>
+  return (
+    <div>
+      <h1>{data.name}</h1>
+      <p>{data.description}</p>
+      <strong>👀 {data.subscribers_count}</strong>{' '}
+      <strong>✨ {data.stargazers_count}</strong>{' '}
+      <strong>🍴 {data.forks_count}</strong>
+    </div>
+  )
 }
 ```
-[swr公式より引用](https://swr.vercel.app/ja#%E6%A6%82%E8%A6%81)
+[Tanstack Queryより引用](https://tanstack.com/query/v4/docs/overview)
 
 エラーが生じたら失敗の表示を、データがなければローディングを返すという形ですね。
 
