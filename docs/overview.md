@@ -8,9 +8,10 @@
 * Next.js
 * jotai
 * axios
-* swr
+* tanstack-query(react-query)
 * jest
 * react-testing-library
+* playwright
 * msw
 * storybook
 * scaffdog
