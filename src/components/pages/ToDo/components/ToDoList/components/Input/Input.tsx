@@ -6,7 +6,8 @@ export const Input = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      Add Task : <input value={newTask} placeholder="Add New Task" onChange={handleAddNewTask} />
+      Add Task : <input value={newTask} placeholder="Add New Task" onChange={handleAddNewTask} />{' '}
+      <button type="submit">追加</button>
     </form>
   )
 }
