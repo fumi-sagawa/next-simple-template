@@ -90,24 +90,17 @@ export const Story: ComponentStoryObj<typeof {{ inputs.name | pascal }}> = {
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.test.ts`
 
 ```typescript
-import { cleanup, renderHook } from '@testing-library/react-hooks'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { {{ inputs.name | pascal }} } from './{{ inputs.name | pascal }}'
 
-import { use{{ inputs.name | pascal }} } from '../use{{ inputs.name | pascal }}'
-
-describe('use{{ inputs.name | pascal }}のテスト', () => {
-  beforeEach(() => {
-    cleanup()
+describe('{{ inputs.name | pascal }}のテスト', () => {
+  
+  it('テストケースと期待される結果を記述', () => {
+    render(<ToDoList />)
+    expect(screen.getByText('ToDo List')).toBeTruthy()
   })
 
-  it('テストする関数と期待される結果を記述', () => {
-    const { result } = renderHook(() => {
-      return use{{ inputs.name | pascal }}()
-    })
-    act(() => {
-      result.current.increment();
-    });
-
-    expect(result.current.count).toBe(1);
-  })
 })
+
 ```

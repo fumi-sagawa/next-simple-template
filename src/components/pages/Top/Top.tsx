@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { Documents } from './components/Documents'
 import { Title } from './components/Title'
@@ -17,6 +18,7 @@ export const Top = () => {
         <div className={styles.container}>
           <Title />
           <Documents />
+          <Link href="/todo">✅サンプルアプリ</Link>
         </div>
       </main>
     </>
