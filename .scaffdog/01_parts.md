@@ -17,7 +17,7 @@ export * from './{{ inputs.name | pascal }}';
 
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
 ```typescript
-import {use{{ inputs.name | pascal }}} from "./use{{ inputs.name | pascal }}"
+{{ if inputs.hasHooks }} import {use{{ inputs.name | pascal }}} from './use{{ inputs.name | pascal }}'{{ end }}
 import styles from './{{ inputs.name | pascal }}.module.scss'
 
 type {{ inputs.name | pascal }}Props = {
