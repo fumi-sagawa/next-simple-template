@@ -141,7 +141,7 @@ describe("コンポーネントのテスト", () => {
 ```
 
 
-英語になってしまいますが、詳しい使い方は[公式ドキュメント](https://mswjs.io/)のDocsやExampleがよくまとまっています。
+英語になってしまいますが、詳しい使い方は[公式ドキュメント](https://mswjs.io/)のDocsやExampleがよくまとまっています。また、実践的な使い方については[こちら](https://sapper-blog-app.vercel.app/blog/examples-of-msw-practice-Applications)もご覧ください。
 
 **参考文献**
 - [フロントエンドのテストのモックには msw を使うのが最近の流行りらしい](https://zenn.dev/azukiazusa/articles/using-msw-to-mock-frontend-tests)
