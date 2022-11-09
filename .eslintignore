@@ -6,3 +6,4 @@ renovate.json
 *.config.js
 .eslintrc.js
 /public/mockServiceWorker.js
+/.mocks/**
